@@ -1,28 +1,32 @@
 
-const chromePath = "resources\\chromedriver\\chromedriver.exe";
-
+// system
 const fs = require('fs');
 const util = require('util');
 
 // Convert fs.readFile into Promise version of same    
 const readFile = util.promisify(fs.readFile);
 
-//Selenium
+// Selenium
 const {Capabilities,Builder, By, Key, until} = require('selenium-webdriver');
-//var chrome = require('selenium-webdriver/chrome');
+const chrome = require('selenium-webdriver/chrome');
+const drv_folder= "Drivers/";
+const drv_name = "chromedriver_"
 
 run();
 
 async function run (){
 
     //variables
-
     const GUID_List = './GUID list.txt';
     var by =  By.css("#hplogo");
     var robots = [];
 
     //Setup
     {
+        // Load driver
+        loadChromedriver()
+
+        // variable
         var chromeCapabilities = Capabilities.chrome()
 
         //Set Options
@@ -75,4 +79,19 @@ async function robot_loadtest(chromeCapabilities,url){
     (await driver).get(url);
     return driver
 
+}
+
+function loadChromedriver(){
+    try {
+        const os = process.platform.toLowerCase();
+        const path = require('path');
+
+        let suffix = os == ("win") ? os + ".exe" : os;
+        let chromePath = drv_folder + drv_name + suffix;
+        let pathstr = path.resolve(chromePath);
+        var service = new chrome.ServiceBuilder(pathstr).build();
+        chrome.setDefaultService(service);
+    } catch (error) {
+        console.log(error)
+    }
 }
