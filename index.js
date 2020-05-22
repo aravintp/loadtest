@@ -86,7 +86,7 @@ function loadChromedriver(){
         const os = process.platform.toLowerCase();
         const path = require('path');
 
-        let suffix = os == ("win") ? os + ".exe" : os;
+        let suffix = os == ("win32") ? os + ".exe" : os;
         let chromePath = drv_folder + drv_name + suffix;
         let pathstr = path.resolve(chromePath);
         var service = new chrome.ServiceBuilder(pathstr).build();
