@@ -1,0 +1,14 @@
+{
+  "name": "loadtest",
+  "version": "1.0.0",
+  "description": "Load test for website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aravinth",
+  "license": "ISC",
+  "dependencies": {
+    "selenium-webdriver": "^4.0.0-alpha.7"
+  }
+}
